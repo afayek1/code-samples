@@ -1,2 +1,2 @@
 # Code Samples
-This is my online portfolio! Each folder in this repository is a project I've worked on in the past.  If you have any questions, please feel free to contact me :)
+This repo contains code I've worked on since I started programming. Some projects were done under time constrains and some just for practice. Please feel free ask questions or offer constructive criticism!
