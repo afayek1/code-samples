@@ -1,10 +1,7 @@
 window.onload = function() {
   var view = new View();
   var controller = new Controller(view);
-  // Allows list to accept items.
-  controller.makeDraggable();
-  // Makes items in the store draggable.
-  controller.makeDroppable();
+  controller.bindEvents();
 }
 
 
@@ -29,21 +26,21 @@ View.prototype = {
     return document.getElementById(this.storeSelector);
   },
 
-  getTotalCostSelector: function () {
+  setTotalCost: function () {
     return document.getElementById(this.totalCostSelector);
   },
 
-  getTotal: function(table) {
+  sumTotal: function(table) {
     var groceryTotal = 0;
     var tableRows = table.tBodies[0].rows;
-    for(var i=0; i<tableRows.length; i++){
+    for (var i = tableRows.length - 1; i >= 0; i--) {
       groceryTotal += parseFloat(tableRows[i].cells[1].innerHTML);
-    }
+    };
     return groceryTotal.toFixed(2);
   },
 
   setTotal: function () {
-   this.getTotalCostSelector().innerHTML = this.getTotal(this.getGroceryList());
+   this.setTotalCost().innerHTML = this.sumTotal(this.getGroceryList());
   }
 }
 
@@ -55,7 +52,6 @@ function Controller(view){
 
 Controller.prototype = {
   // TODO: Implement draggable/droppable with VanillaJS and use view object's selectors
-
   makeDraggable: function() {
     $(".item").draggable({
       helper: "clone",
@@ -74,4 +70,11 @@ Controller.prototype = {
       }
     })
   },
+
+  bindEvents: function(){
+    // Allows list to accept items.
+    this.makeDraggable();
+    // Makes items in the store draggable.
+    this.makeDroppable();
+  }
 };
